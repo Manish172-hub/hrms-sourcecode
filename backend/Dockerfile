@@ -1,12 +1,9 @@
-FROM node:18
+FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
 COPY . .
 
-EXPOSE 4200
+EXPOSE 8080
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+CMD ["python3", "-m", "http.server", "8080"]
