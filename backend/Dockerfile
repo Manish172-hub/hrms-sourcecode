@@ -1,14 +1,12 @@
-services:
-  backend:
-    build:
-      context: ./backend
-    ports:
-      - "8080:8080"
+FROM node:18
 
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 4200
+
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
